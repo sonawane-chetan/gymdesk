@@ -1,20 +1,299 @@
 /**
  * ============================================================================
- * IronFit Gym — Production Backend Server & SQLite Database
- * Built with Node.js built-in HTTP and node:sqlite (Node v22+)
+ * GymDesk — Production Backend Server & Multi-Engine Database
+ * Supports Node 22+ (node:sqlite), better-sqlite3, and pure zero-dependency JSON
  * ============================================================================
  */
 
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
-const { DatabaseSync } = require('node:sqlite');
 
 const PORT = process.env.PORT || 3000;
 const DB_PATH = path.join(__dirname, 'gym.db');
+const JSON_DB_PATH = path.join(__dirname, 'gym_data.json');
 
-// Initialize persistent SQLite database
-const db = new DatabaseSync(DB_PATH);
+// Portable JSON Database Adapter for environments without built-in or native SQLite
+function createJsonDbAdapter(filePath) {
+  let state = { members: [], payments: [], reminders_log: [], audit_logs: [] };
+
+  if (fs.existsSync(filePath)) {
+    try {
+      state = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      state.members = state.members || [];
+      state.payments = state.payments || [];
+      state.reminders_log = state.reminders_log || [];
+      state.audit_logs = state.audit_logs || [];
+    } catch (e) {
+      console.warn('[DB] Failed parsing existing json db, initializing fresh:', e.message);
+    }
+  }
+
+  function save() {
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(state, null, 2), 'utf8');
+    } catch (e) {
+      console.error('[DB] Error saving json db:', e.message);
+    }
+  }
+
+  return {
+    exec(sql) {
+      // Schema definitions are handled in memory structure
+    },
+    prepare(sql) {
+      const s = sql.trim();
+
+      // 1. SELECT COUNT(*) as count FROM members
+      if (/SELECT\s+COUNT\(\*\)\s+as\s+count\s+FROM\s+members/i.test(s)) {
+        return {
+          get: () => ({ count: state.members.length })
+        };
+      }
+
+      // 2. INSERT INTO members
+      if (/INSERT\s+INTO\s+members/i.test(s)) {
+        return {
+          run: (...args) => {
+            state.members.push({
+              member_id: args[0],
+              name: args[1],
+              phone: args[2],
+              plan: args[3],
+              plan_months: args[4],
+              fee: args[5],
+              start_date: args[6],
+              expiry_date: args[7],
+              payment_status: args[8] || 'Pending',
+              last_payment_date: args[9] || '',
+              last_reminder_date: args[10] || '',
+              last_payment_ref: args[11] || '',
+              created_at: new Date().toISOString()
+            });
+            save();
+            return { changes: 1 };
+          }
+        };
+      }
+
+      // 3. INSERT INTO audit_logs
+      if (/INSERT\s+INTO\s+audit_logs/i.test(s)) {
+        return {
+          run: (...args) => {
+            state.audit_logs.push({
+              id: state.audit_logs.length + 1,
+              event_type: args[0],
+              description: args[1],
+              created_at: new Date().toISOString()
+            });
+            save();
+            return { changes: 1 };
+          }
+        };
+      }
+
+      // 4. SELECT COALESCE(SUM(amount), 0) as sum FROM payments
+      if (/SELECT\s+COALESCE\(SUM\(amount\),\s*0\)\s+as\s+sum\s+FROM\s+payments/i.test(s)) {
+        return {
+          get: () => {
+            const sum = state.payments.reduce((acc, p) => acc + (Number(p.amount) || 0), 0);
+            return { sum };
+          }
+        };
+      }
+
+      // 5. SELECT * FROM members WHERE member_id LIKE ? OR name LIKE ? OR phone LIKE ? ORDER BY created_at DESC
+      if (/WHERE\s+member_id\s+LIKE\s+\?\s+OR\s+name\s+LIKE/i.test(s)) {
+        return {
+          all: (...args) => {
+            const query = (args[0] || '').replace(/%/g, '').toLowerCase();
+            return state.members
+              .filter(m => (m.member_id && m.member_id.toLowerCase().includes(query)) ||
+                           (m.name && m.name.toLowerCase().includes(query)) ||
+                           (m.phone && m.phone.includes(query)))
+              .slice()
+              .reverse();
+          }
+        };
+      }
+
+      // 6. SELECT * FROM members WHERE LOWER(member_id) = LOWER(?) OR phone = ? OR ...
+      if (/WHERE\s+LOWER\(member_id\)\s*=\s*LOWER\(\?\)/i.test(s)) {
+        return {
+          get: (...args) => {
+            const q = (args[0] || '').toLowerCase();
+            const phone = args[1] || '';
+            return state.members.find(m =>
+              (m.member_id && m.member_id.toLowerCase() === q) ||
+              (m.phone === phone) ||
+              (phone.length >= 8 && m.phone && m.phone.includes(phone))
+            ) || null;
+          }
+        };
+      }
+
+      // 7. SELECT * FROM members WHERE phone = ?
+      if (/WHERE\s+phone\s*=\s*\?/i.test(s)) {
+        return {
+          get: (phone) => state.members.find(m => m.phone === phone) || null
+        };
+      }
+
+      // 8. SELECT * FROM members WHERE member_id = ?
+      if (/WHERE\s+member_id\s*=\s*\?/i.test(s) && !/UPDATE/i.test(s)) {
+        return {
+          get: (id) => state.members.find(m => m.member_id === id) || null
+        };
+      }
+
+      // 9. UPDATE members SET name = ... WHERE member_id = ?
+      if (/UPDATE\s+members\s+SET\s+name\s*=/i.test(s)) {
+        return {
+          run: (...args) => {
+            const mId = args[6];
+            const m = state.members.find(x => x.member_id === mId);
+            if (m) {
+              m.name = args[0];
+              m.plan = args[1];
+              m.plan_months = args[2];
+              m.fee = args[3];
+              m.start_date = args[4];
+              m.expiry_date = args[5];
+              m.payment_status = 'Pending';
+              save();
+            }
+            return { changes: m ? 1 : 0 };
+          }
+        };
+      }
+
+      // 10. UPDATE members SET payment_status = 'Paid' ... WHERE member_id = ?
+      if (/UPDATE\s+members\s+SET\s+payment_status\s*=\s*'Paid'/i.test(s)) {
+        return {
+          run: (...args) => {
+            const mId = args[3];
+            const m = state.members.find(x => x.member_id === mId);
+            if (m) {
+              m.payment_status = 'Paid';
+              m.last_payment_date = args[0];
+              m.expiry_date = args[1];
+              m.last_payment_ref = args[2];
+              save();
+            }
+            return { changes: m ? 1 : 0 };
+          }
+        };
+      }
+
+      // 11. INSERT INTO payments
+      if (/INSERT\s+INTO\s+payments/i.test(s)) {
+        return {
+          run: (...args) => {
+            state.payments.push({
+              id: state.payments.length + 1,
+              member_id: args[0],
+              amount: args[1],
+              method: args[2],
+              payment_ref: args[3],
+              payment_date: args[4],
+              created_at: new Date().toISOString()
+            });
+            save();
+            return { changes: 1 };
+          }
+        };
+      }
+
+      // 12. SELECT * FROM members WHERE expiry_date IS NOT NULL AND phone IS NOT NULL
+      if (/WHERE\s+expiry_date\s+IS\s+NOT\s+NULL\s+AND\s+phone\s+IS\s+NOT\s+NULL/i.test(s)) {
+        return {
+          all: () => state.members.filter(m => m.expiry_date && m.phone)
+        };
+      }
+
+      // 13. UPDATE members SET last_reminder_date = ? WHERE member_id = ?
+      if (/UPDATE\s+members\s+SET\s+last_reminder_date\s*=/i.test(s)) {
+        return {
+          run: (...args) => {
+            const m = state.members.find(x => x.member_id === args[1]);
+            if (m) {
+              m.last_reminder_date = args[0];
+              save();
+            }
+            return { changes: m ? 1 : 0 };
+          }
+        };
+      }
+
+      // 14. INSERT INTO reminders_log
+      if (/INSERT\s+INTO\s+reminders_log/i.test(s)) {
+        return {
+          run: (...args) => {
+            state.reminders_log.push({
+              id: state.reminders_log.length + 1,
+              member_id: args[0],
+              phone: args[1],
+              template_name: args[2],
+              sent_date: args[3],
+              days_left: args[4],
+              created_at: new Date().toISOString()
+            });
+            save();
+            return { changes: 1 };
+          }
+        };
+      }
+
+      // 15. SELECT * FROM members ORDER BY member_id ASC
+      if (/SELECT\s+\*\s+FROM\s+members\s+ORDER\s+BY\s+member_id\s+ASC/i.test(s)) {
+        return {
+          all: () => state.members.slice().sort((a, b) => (a.member_id || '').localeCompare(b.member_id || ''))
+        };
+      }
+
+      // 16. SELECT * FROM members ORDER BY created_at DESC
+      if (/SELECT\s+\*\s+FROM\s+members\s+ORDER\s+BY\s+created_at\s+DESC/i.test(s)) {
+        return {
+          all: () => state.members.slice().reverse()
+        };
+      }
+
+      // 17. Default: SELECT * FROM members
+      if (/SELECT\s+\*\s+FROM\s+members/i.test(s)) {
+        return {
+          all: () => [...state.members]
+        };
+      }
+
+      // Fallback
+      return {
+        run: () => ({ changes: 0 }),
+        get: () => null,
+        all: () => []
+      };
+    }
+  };
+}
+
+// Database initialization
+function initDatabase() {
+  try {
+    const { DatabaseSync } = require('node:sqlite');
+    console.log('[DB] Running with Node.js built-in node:sqlite');
+    return new DatabaseSync(DB_PATH);
+  } catch (e1) {
+    try {
+      const Database = require('better-sqlite3');
+      console.log('[DB] Running with better-sqlite3');
+      return new Database(DB_PATH);
+    } catch (e2) {
+      console.log('[DB] Running with portable JSON storage engine (Zero-dependency)');
+      return createJsonDbAdapter(JSON_DB_PATH);
+    }
+  }
+}
+
+const db = initDatabase();
 
 // Create tables
 db.exec(`
@@ -511,7 +790,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`=======================================================`);
-  console.log(`IronFit Gym Backend & Database running on http://localhost:${PORT}`);
+  console.log(`GymDesk Backend & Database running on http://localhost:${PORT}`);
   console.log(`Connected to SQLite Database: ${DB_PATH}`);
   console.log(`=======================================================`);
 });

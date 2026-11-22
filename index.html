@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GymDesk — Hardcore Strength &amp; Conditioning Club</title>
+  <meta name="description" content="Jaipur's premier strength, bodybuilding, and athletic conditioning facility. Managed by GymDesk.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { iron: { red:'#cc1414', darkred:'#991010', black:'#080808', card:'#141414', border:'rgba(255,255,255,0.08)' } },
+        fontFamily: { display:['"Barlow Condensed"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] }
+      }}
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-[#080808] text-[#f5f5f5] font-sans antialiased min-h-screen">
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <img src="dumbbell_cutout.png" alt="GymDesk Dumbbell" class="nav-logo-dumbbell">
+        </div>
+        <div class="tracking-wider">
+          <span class="text-white font-black text-2xl font-['Barlow_Condensed'] nav-logo-text">GYM<span class="text-red-600">DESK</span></span>
+          <span class="text-[10px] text-neutral-400 block -mt-1 font-mono tracking-widest">FITNESS ARENA &amp; CLUB</span>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="/plans.html" class="nav-link">Plans</a>
+        <a href="/portal.html" class="nav-link flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>Member Portal
+        </a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="/plans.html" class="btn btn-red text-xs py-2 px-5">Join Now</a>
+        <button id="btn-mobile-nav" class="lg:hidden p-2 text-neutral-400 hover:text-white" aria-label="Toggle Navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-[#0f0f0f] border-b border-red-900/30 p-4 space-y-3">
+      <a href="/" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Home</a>
+      <a href="/plans.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Plans</a>
+      <a href="/portal.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Member Portal</a>
+      <a href="/contact.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 border-b border-neutral-800">
+    <div class="hero-bg-num">GYMDESK</div>
+    <div class="max-w-7xl mx-auto w-full relative z-10">
+      <div class="max-w-3xl space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-red-950/60 border border-red-700/50 text-red-400 text-xs font-bold uppercase tracking-widest font-mono">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+          JAIPUR'S PREMIER HARDCORE STRENGTH ARENA • OPEN TODAY
+        </div>
+        <h1 class="t-display text-white">FORGE YOUR BODY.<br/><span class="red-text">NO EXCUSES.</span></h1>
+        <p class="text-base sm:text-lg text-neutral-300 leading-relaxed font-normal max-w-2xl">
+          10,000 sq.ft of Olympic grade iron, calibrated steel plates, Hammer Strength plate-loaded machines, and high-intensity athletic conditioning. Automated membership care with zero paper register chaos.
+        </p>
+        <div class="flex flex-wrap items-center gap-4 pt-4">
+          <a href="/plans.html" class="btn btn-red text-base py-3.5 px-8">
+            Start Today — Instant Join
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="/portal.html" class="btn btn-outline text-base py-3.5 px-7">Member Status / Renew</a>
+          <button onclick="GymApp.toggleBotWidget()" class="btn btn-sm bg-[#181818] border border-neutral-700 hover:border-red-600 text-xs py-3 px-4 text-neutral-300 flex items-center gap-2">
+            <span>💬 Ask AI Assistant</span>
+          </button>
+        </div>
+        <div class="pt-6 flex flex-wrap items-center gap-6 text-xs text-neutral-400 font-mono">
+          <span class="flex items-center gap-1.5"><span class="text-red-500 font-bold">✓</span> Free Locker Access</span>
+          <span class="flex items-center gap-1.5"><span class="text-red-500 font-bold">✓</span> Certified Strength Coaches</span>
+          <span class="flex items-center gap-1.5"><span class="text-red-500 font-bold">✓</span> Instant WhatsApp Updates</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS RIBBON -->
+  <section class="stat-strip">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4">
+      <div class="stat-item"><span class="stat-num">140+</span><span class="stat-label">Active Members</span></div>
+      <div class="stat-item"><span class="stat-num">50+</span><span class="stat-label">Heavy Machines</span></div>
+      <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Certified Coaches</span></div>
+      <div class="stat-item" style="border-right:none"><span class="stat-num">17 HRS</span><span class="stat-label">Open Daily 5:30AM - 10:30PM</span></div>
+    </div>
+  </section>
+
+  <!-- TRAINING PROGRAMS -->
+  <section id="programs" class="section border-b border-neutral-800">
+    <div class="container">
+      <div class="mb-12">
+        <span class="sec-label">SPECIALIZED DISCIPLINES</span>
+        <h2 class="t-h2 text-white mt-1">BUILT FOR EVERY LEVEL OF LIFTER</h2>
+        <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mt-2">From competitive powerlifters and physique athletes to beginners starting their first day.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card p-6 space-y-3">
+          <div class="feature-icon text-red-500">🏋️‍♂️</div>
+          <h3 class="t-h3 text-white">Heavy Iron &amp; Powerlifting</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">Competition specification power cages, Eleiko Olympic bars, calibrated cast iron plates, and dedicated deadlift drop platforms. Chalk encouraged.</p>
+          <ul class="text-xs text-neutral-400 space-y-1.5 pt-2">
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> 4 Dedicated Squat &amp; Power Racks</li>
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> Solid Rubber Deadlift Platforms</li>
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> Dumbbells Ranging from 2.5kg to 60kg</li>
+          </ul>
+        </div>
+        <div class="card p-6 space-y-3">
+          <div class="feature-icon text-red-500">⚡</div>
+          <h3 class="t-h3 text-white">Hypertrophy &amp; Bodybuilding</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">Isolateral plate-loaded machinery designed for optimal biomechanics and maximum muscle fiber recruitment without joint impingement.</p>
+          <ul class="text-xs text-neutral-400 space-y-1.5 pt-2">
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> Full Hammer Strength Equipment Line</li>
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> Dual Cable Cross &amp; High Pulley Rows</li>
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> Hack Squat &amp; Pendulum Squat Units</li>
+          </ul>
+        </div>
+        <div class="card p-6 space-y-3">
+          <div class="feature-icon text-red-500">🔥</div>
+          <h3 class="t-h3 text-white">Athletic &amp; Functional Arena</h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">Sprint turf, sled pushing lanes, battle ropes, and kettlebells built to build conditioning, explosive power, and raw cardiovascular endurance.</p>
+          <ul class="text-xs text-neutral-400 space-y-1.5 pt-2">
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> 25-Meter Indoor Sled Sprint Track</li>
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> Concept2 SkiErgs &amp; Air Assault Bikes</li>
+            <li class="flex items-center gap-2"><span class="text-red-500 font-bold">▸</span> Heavy Boxing Bags &amp; Plyometric Boxes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section id="facilities" class="section bg-[#0c0c0c] border-b border-neutral-800">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 space-y-5">
+          <span class="sec-label">PREMIUM RECOVERY &amp; FACILITIES</span>
+          <h2 class="t-h2 text-white">TRAIN LIKE A BEAST.<br/>RECOVER LIKE A CHAMPION.</h2>
+          <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed">Recovery is where strength grows. IronFit offers state-of-the-art wellness amenities to ensure your central nervous system rebounds before your next heavy session.</p>
+          <div class="space-y-3 pt-2">
+            <div class="p-3.5 bg-[#141414] rounded border border-neutral-800 flex items-start gap-3">
+              <span class="text-xl">🧖</span>
+              <div><h4 class="text-xs font-bold uppercase text-white font-['Barlow_Condensed']">Finnish Heat Sauna &amp; Steam Bath</h4><p class="text-xs text-neutral-400">Available free with Quarterly, Half-Yearly &amp; Annual plans.</p></div>
+            </div>
+            <div class="p-3.5 bg-[#141414] rounded border border-neutral-800 flex items-start gap-3">
+              <span class="text-xl">🚿</span>
+              <div><h4 class="text-xs font-bold uppercase text-white font-['Barlow_Condensed']">Private Lockers &amp; Showers</h4><p class="text-xs text-neutral-400">Clean, ventilated locker rooms with secure combination locks and hot showers.</p></div>
+            </div>
+            <div class="p-3.5 bg-[#141414] rounded border border-neutral-800 flex items-start gap-3">
+              <span class="text-xl">🥤</span>
+              <div><h4 class="text-xs font-bold uppercase text-white font-['Barlow_Condensed']">Protein Shake &amp; Hydration Bar</h4><p class="text-xs text-neutral-400">Fresh whey shakes, electrolytes, pre-workouts, and chilled RO water stations.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+          <div class="p-5 bg-[#141414] rounded border border-neutral-800 space-y-2"><div class="text-2xl font-black text-red-500 font-['Barlow_Condensed']">10,000 SQ.FT</div><div class="text-xs font-bold uppercase text-white">Expansive Training Floor</div><p class="text-xs text-neutral-400">No waiting in line for benches or cables even during peak evening hours.</p></div>
+          <div class="p-5 bg-[#141414] rounded border border-neutral-800 space-y-2"><div class="text-2xl font-black text-red-500 font-['Barlow_Condensed']">100% AIR-COOLED</div><div class="text-xs font-bold uppercase text-white">High CFM Ventilation</div><p class="text-xs text-neutral-400">Industrial ducting and fresh air exchanges to keep the floor fresh and cool.</p></div>
+          <div class="p-5 bg-[#141414] rounded border border-neutral-800 space-y-2"><div class="text-2xl font-black text-red-500 font-['Barlow_Condensed']">INBODY 270</div><div class="text-xs font-bold uppercase text-white">Body Composition Scanner</div><p class="text-xs text-neutral-400">Track skeletal muscle mass, body fat percentage, and visceral metrics monthly.</p></div>
+          <div class="p-5 bg-[#141414] rounded border border-neutral-800 space-y-2"><div class="text-2xl font-black text-red-500 font-['Barlow_Condensed']">WHATSAPP AI</div><div class="text-xs font-bold uppercase text-white">Automated Member Concierge</div><p class="text-xs text-neutral-400">Instant reminders, attendance tracking, and 1-click renewal alerts.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-1 text-center md:text-left">
+        <div class="text-lg font-black text-white font-['Barlow_Condensed'] uppercase tracking-wider flex items-center justify-center md:justify-start gap-2"><span>⚡ GYMDESK JAIPUR</span></div>
+        <p class="text-xs text-neutral-500">The hardcore iron and athletic conditioning standard. Plot 42, Kings Road, Nirman Nagar, Jaipur.</p>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-neutral-400">
+        <a href="/plans.html" class="hover:text-red-500">Plans</a>
+        <a href="/portal.html" class="hover:text-red-500">Member Portal</a>
+        <a href="/contact.html" class="hover:text-red-500">Contact</a>
+        <span>•</span>
+        <button onclick="GymApp.toggleStaffModal()" class="text-neutral-500 hover:text-red-400 underline font-mono text-[11px]">Staff Desk View</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOT LAUNCHER -->
+  <button id="bot-launcher" onclick="GymApp.toggleBotWidget()" aria-label="Open AI Gym Assistant"><span>⚡</span><span>Ask Gym Assistant</span></button>
+
+  <!-- BOT WIDGET -->
+  <div id="bot-widget" class="hidden">
+    <div class="bot-header">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center font-bold text-white text-xs">⚡</div>
+        <div><div class="text-xs font-bold text-white font-['Barlow_Condensed'] uppercase tracking-wider">IronFit AI Assistant</div><div class="text-[9px] text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online • Instant Answers</div></div>
+      </div>
+      <button onclick="GymApp.toggleBotWidget()" class="text-neutral-400 hover:text-white text-lg font-bold">✕</button>
+    </div>
+    <div id="bot-messages" class="bot-chat-body"></div>
+    <div class="px-3 py-2 bg-[#111] flex gap-1.5 overflow-x-auto text-[10px] text-neutral-300 font-mono border-t border-neutral-800">
+      <button onclick="document.getElementById('bot-query-input').value='What are your fees?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Fees?</button>
+      <button onclick="document.getElementById('bot-query-input').value='What are your gym timings?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Timings?</button>
+      <button onclick="document.getElementById('bot-query-input').value='Do you offer a free trial pass?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Free Trial?</button>
+      <button onclick="document.getElementById('bot-query-input').value='Where is the gym located?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Location?</button>
+    </div>
+    <div class="bot-input-bar">
+      <input id="bot-query-input" type="text" placeholder="Ask about fees, timings, trial..." class="flex-1 bg-[#1c1c1c] rounded px-3 py-1.5 text-xs text-white outline-none">
+      <button id="btn-send-bot-query" class="w-8 h-8 rounded bg-red-600 text-white flex items-center justify-center font-bold text-xs hover:bg-red-500">➤</button>
+    </div>
+  </div>
+
+  <!-- STAFF MODAL -->
+  <div id="staff-modal" class="hidden">
+    <div class="staff-modal-box">
+      <div class="p-4 bg-[#111] border-b border-neutral-800 flex items-center justify-between">
+        <div class="flex items-center gap-2"><span class="text-red-500 font-bold">🔒</span><span class="text-sm font-bold uppercase tracking-wider text-white font-['Barlow_Condensed']">Front-Desk Manager Console</span></div>
+        <button onclick="GymApp.toggleStaffModal()" class="text-neutral-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+      <div class="p-4 bg-[#0a0a0a] border-b border-neutral-800"><div id="staff-digest-preview"></div></div>
+      <div class="flex-1 overflow-auto p-4">
+        <table class="w-full text-left"><thead><tr class="text-[11px] font-mono text-neutral-500 border-b border-neutral-800"><th class="p-2">ID</th><th class="p-2">NAME</th><th class="p-2">PHONE</th><th class="p-2">PLAN</th><th class="p-2">FEE</th><th class="p-2">EXPIRY</th><th class="p-2">STATUS</th><th class="p-2">LAST REMINDER</th></tr></thead><tbody id="staff-sheet-tbody"></tbody></table>
+      </div>
+      <div class="p-3 bg-[#111] border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+        <span>SQLite Database (gym.db)</span>
+        <div class="flex items-center gap-2">
+          <a href="/api/export/csv" download class="px-3 py-1 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-[11px] flex items-center gap-1">📥 Export CSV</a>
+          <button onclick="GymApp.triggerExpiryScan()" class="px-3 py-1 bg-neutral-800 hover:bg-red-900 text-white rounded text-[11px]">Run Expiry Scan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div id="success-overlay" class="no-print">
+    <div class="success-box">
+      <div class="success-icon">💪</div>
+      <h3 class="t-h2 text-white mb-1">REGISTRATION CONFIRMED!</h3>
+      <p class="text-xs text-neutral-400 mb-6">Welcome to IronFit Gym. Your membership record has been generated and saved.</p>
+      <div class="p-4 bg-[#141414] rounded border border-neutral-800 text-left space-y-2.5 font-mono text-xs mb-6">
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">MEMBER ID</span><span id="modal-member-id" class="text-red-400 font-bold">GYM-000000</span></div>
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">MEMBER NAME</span><span id="modal-member-name" class="text-white font-bold font-sans">Name</span></div>
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">PLAN</span><span id="modal-member-plan" class="text-white">Quarterly</span></div>
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">VALID UNTIL</span><span id="modal-member-expiry" class="text-emerald-400 font-bold">2026-12-31</span></div>
+        <div class="flex justify-between"><span class="text-neutral-500">AMOUNT DUE</span><span id="modal-member-fee" class="text-white font-bold">₹3,000</span></div>
+      </div>
+      <button id="btn-close-modal" class="btn btn-red w-full text-xs py-3">Done — Go to Floor</button>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/gym.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.GymApp) GymApp.init();
+      const btnMob = document.getElementById('btn-mobile-nav');
+      const menuMob = document.getElementById('mobile-menu');
+      if (btnMob && menuMob) {
+        btnMob.addEventListener('click', () => menuMob.classList.toggle('hidden'));
+        menuMob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menuMob.classList.add('hidden')));
+      }
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => { navbar.classList.toggle('solid', window.scrollY > 40); });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+.npm/
+
+# Environment and secrets
+.env
+.env.local
+
+# Database (optional: keep gym.db ignored if personal data)
+# gym.db
+
+# OS files
+.DS_Store
+Thumbs.db

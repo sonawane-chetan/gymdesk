@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hours &amp; Location — GymDesk</title>
+  <meta name="description" content="IronFit Gym Jaipur timings, operating schedule, location map, and direct contact details.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { iron: { red:'#cc1414', darkred:'#991010', black:'#080808', card:'#141414', border:'rgba(255,255,255,0.08)' } },
+        fontFamily: { display:['"Barlow Condensed"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] }
+      }}
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-[#080808] text-[#f5f5f5] font-sans antialiased min-h-screen">
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar solid" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <img src="dumbbell_cutout.png" alt="GymDesk Dumbbell" class="nav-logo-dumbbell">
+        </div>
+        <div class="tracking-wider">
+          <span class="text-white font-black text-2xl font-['Barlow_Condensed'] nav-logo-text">GYM<span class="text-red-600">DESK</span></span>
+          <span class="text-[10px] text-neutral-400 block -mt-1 font-mono tracking-widest">FITNESS ARENA &amp; CLUB</span>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/plans.html" class="nav-link">Plans</a>
+        <a href="/portal.html" class="nav-link flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>Member Portal
+        </a>
+        <a href="/contact.html" class="nav-link active">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="/plans.html" class="btn btn-red text-xs py-2 px-5">Join Now</a>
+        <button id="btn-mobile-nav" class="lg:hidden p-2 text-neutral-400 hover:text-white" aria-label="Toggle Navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-[#0f0f0f] border-b border-red-900/30 p-4 space-y-3">
+      <a href="/" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Home</a>
+      <a href="/plans.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Plans</a>
+      <a href="/portal.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Member Portal</a>
+      <a href="/contact.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Contact</a>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 border-b border-neutral-800 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto text-center space-y-3">
+      <span class="sec-label justify-center">FIND &amp; REACH US</span>
+      <h1 class="t-h2 text-white">OPERATING SCHEDULE &amp; LOCATION</h1>
+      <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto">
+        Visit our Jaipur facility, check floor peak hours, or message our 24/7 AI Concierge desk directly.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOURS & LOCATION CARDS -->
+  <section id="timings" class="section border-b border-neutral-800">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+        
+        <!-- Operating Hours Card -->
+        <div class="card p-8 space-y-6">
+          <span class="sec-label">HOURS OF OPERATION</span>
+          <h3 class="t-h2 text-white">OPEN 7 DAYS A WEEK</h3>
+
+          <div class="space-y-4 font-mono text-xs">
+            <div class="flex justify-between items-center pb-3 border-b border-neutral-800">
+              <span class="text-white font-bold">MONDAY — SATURDAY</span>
+              <span class="text-red-400 font-bold">05:30 AM – 10:30 PM</span>
+            </div>
+            <div class="flex justify-between items-center pb-3 border-b border-neutral-800">
+              <span class="text-white font-bold">SUNDAY (ACTIVE RECOVERY)</span>
+              <span class="text-red-400 font-bold">06:00 AM – 12:00 PM</span>
+            </div>
+            <div class="flex justify-between items-center text-neutral-400">
+              <span>HOLIDAYS &amp; FESTIVALS</span>
+              <span class="text-neutral-300">Notified via WhatsApp</span>
+            </div>
+          </div>
+
+          <div class="p-3 bg-[#181818] rounded border border-neutral-800 text-xs text-neutral-400">
+            💡 <strong>Peak Hours:</strong> 06:30 AM – 09:00 AM &amp; 06:00 PM – 08:30 PM.<br/>
+            <strong>Off-Peak Quiet Hours:</strong> 11:00 AM – 04:30 PM (Ideal for filming/uninterrupted lifts).
+          </div>
+        </div>
+
+        <!-- Location & Contact -->
+        <div class="card p-8 space-y-6">
+          <span class="sec-label">LOCATION &amp; CONTACT</span>
+          <h3 class="t-h2 text-white">FIND THE ARENA</h3>
+
+          <div class="space-y-3 text-xs text-neutral-300">
+            <div class="flex items-start gap-3">
+              <span class="text-red-500 text-base">📍</span>
+              <div>
+                <strong class="text-white block mb-0.5">GymDesk Fitness Arena Jaipur</strong>
+                Plot 42, Kings Road, Nirman Nagar, Jaipur, Rajasthan 302019<br/>
+                <span class="text-neutral-400 text-[11px]">(Near Metro Pillar 84, Above Organic Mart)</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-red-500 text-base">📞</span>
+              <div>
+                <strong class="text-white">Front Desk Hotline:</strong> +91 98765 43210
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-red-500 text-base">💬</span>
+              <div>
+                <strong class="text-white">Official WhatsApp:</strong> +91 98765 43210 (24/7 AI Concierge)
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 flex gap-3">
+            <a href="https://maps.google.com" target="_blank" class="btn btn-outline text-xs py-2.5 px-4 flex-1 text-center">
+              Open in Google Maps
+            </a>
+            <button onclick="GymApp.toggleBotWidget()" class="btn btn-red text-xs py-2.5 px-4 flex-1">
+              Chat on WhatsApp
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-1 text-center md:text-left">
+        <div class="text-lg font-black text-white font-['Barlow_Condensed'] uppercase tracking-wider flex items-center justify-center md:justify-start gap-2"><span>⚡ GYMDESK JAIPUR</span></div>
+        <p class="text-xs text-neutral-500">The hardcore iron and athletic conditioning standard. Plot 42, Kings Road, Nirman Nagar, Jaipur.</p>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-neutral-400">
+        <a href="/" class="hover:text-red-500">Home</a>
+        <a href="/plans.html" class="hover:text-red-500">Plans</a>
+        <a href="/portal.html" class="hover:text-red-500">Member Portal</a>
+        <span>•</span>
+        <button onclick="GymApp.toggleStaffModal()" class="text-neutral-500 hover:text-red-400 underline font-mono text-[11px]">Staff Desk View</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOT LAUNCHER -->
+  <button id="bot-launcher" onclick="GymApp.toggleBotWidget()" aria-label="Open AI Gym Assistant"><span>⚡</span><span>Ask Gym Assistant</span></button>
+
+  <!-- BOT WIDGET -->
+  <div id="bot-widget" class="hidden">
+    <div class="bot-header">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center font-bold text-white text-xs">⚡</div>
+        <div><div class="text-xs font-bold text-white font-['Barlow_Condensed'] uppercase tracking-wider">IronFit AI Assistant</div><div class="text-[9px] text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online • Instant Answers</div></div>
+      </div>
+      <button onclick="GymApp.toggleBotWidget()" class="text-neutral-400 hover:text-white text-lg font-bold">✕</button>
+    </div>
+    <div id="bot-messages" class="bot-chat-body"></div>
+    <div class="px-3 py-2 bg-[#111] flex gap-1.5 overflow-x-auto text-[10px] text-neutral-300 font-mono border-t border-neutral-800">
+      <button onclick="document.getElementById('bot-query-input').value='What are your fees?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Fees?</button>
+      <button onclick="document.getElementById('bot-query-input').value='What are your gym timings?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Timings?</button>
+      <button onclick="document.getElementById('bot-query-input').value='Do you offer a free trial pass?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Free Trial?</button>
+      <button onclick="document.getElementById('bot-query-input').value='Where is the gym located?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Location?</button>
+    </div>
+    <div class="bot-input-bar">
+      <input id="bot-query-input" type="text" placeholder="Ask about fees, timings, trial..." class="flex-1 bg-[#1c1c1c] rounded px-3 py-1.5 text-xs text-white outline-none">
+      <button id="btn-send-bot-query" class="w-8 h-8 rounded bg-red-600 text-white flex items-center justify-center font-bold text-xs hover:bg-red-500">➤</button>
+    </div>
+  </div>
+
+  <!-- STAFF MODAL -->
+  <div id="staff-modal" class="hidden">
+    <div class="staff-modal-box">
+      <div class="p-4 bg-[#111] border-b border-neutral-800 flex items-center justify-between">
+        <div class="flex items-center gap-2"><span class="text-red-500 font-bold">🔒</span><span class="text-sm font-bold uppercase tracking-wider text-white font-['Barlow_Condensed']">Front-Desk Manager Console</span></div>
+        <button onclick="GymApp.toggleStaffModal()" class="text-neutral-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+      <div class="p-4 bg-[#0a0a0a] border-b border-neutral-800"><div id="staff-digest-preview"></div></div>
+      <div class="flex-1 overflow-auto p-4">
+        <table class="w-full text-left"><thead><tr class="text-[11px] font-mono text-neutral-500 border-b border-neutral-800"><th class="p-2">ID</th><th class="p-2">NAME</th><th class="p-2">PHONE</th><th class="p-2">PLAN</th><th class="p-2">FEE</th><th class="p-2">EXPIRY</th><th class="p-2">STATUS</th><th class="p-2">LAST REMINDER</th></tr></thead><tbody id="staff-sheet-tbody"></tbody></table>
+      </div>
+      <div class="p-3 bg-[#111] border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+        <span>SQLite Database (gym.db)</span>
+        <div class="flex items-center gap-2">
+          <a href="/api/export/csv" download class="px-3 py-1 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-[11px] flex items-center gap-1">📥 Export CSV</a>
+          <button onclick="GymApp.triggerExpiryScan()" class="px-3 py-1 bg-neutral-800 hover:bg-red-900 text-white rounded text-[11px]">Run Expiry Scan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/gym.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.GymApp) GymApp.init();
+      const btnMob = document.getElementById('btn-mobile-nav');
+      const menuMob = document.getElementById('mobile-menu');
+      if (btnMob && menuMob) {
+        btnMob.addEventListener('click', () => menuMob.classList.toggle('hidden'));
+        menuMob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menuMob.classList.add('hidden')));
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership Plans &amp; Registration — GymDesk</title>
+  <meta name="description" content="Choose your transparent gym membership plan and register online with instant access.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { iron: { red:'#cc1414', darkred:'#991010', black:'#080808', card:'#141414', border:'rgba(255,255,255,0.08)' } },
+        fontFamily: { display:['"Barlow Condensed"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] }
+      }}
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-[#080808] text-[#f5f5f5] font-sans antialiased min-h-screen">
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar solid" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
+      <a href="/" class="nav-logo">
+        <div class="nav-logo-mark">
+          <img src="dumbbell_cutout.png" alt="GymDesk Dumbbell" class="nav-logo-dumbbell">
+        </div>
+        <div class="tracking-wider">
+          <span class="text-white font-black text-2xl font-['Barlow_Condensed'] nav-logo-text">GYM<span class="text-red-600">DESK</span></span>
+          <span class="text-[10px] text-neutral-400 block -mt-1 font-mono tracking-widest">FITNESS ARENA &amp; CLUB</span>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/plans.html" class="nav-link active">Plans</a>
+        <a href="/portal.html" class="nav-link flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>Member Portal
+        </a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="#join" class="btn btn-red text-xs py-2 px-5">Join Now</a>
+        <button id="btn-mobile-nav" class="lg:hidden p-2 text-neutral-400 hover:text-white" aria-label="Toggle Navigation">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 right-0 bg-[#0f0f0f] border-b border-red-900/30 p-4 space-y-3">
+      <a href="/" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Home</a>
+      <a href="/plans.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Plans</a>
+      <a href="/portal.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Member Portal</a>
+      <a href="/contact.html" class="block text-sm font-bold uppercase tracking-wider text-neutral-300 hover:text-red-500 py-1">Contact</a>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="pt-32 pb-12 px-4 sm:px-6 lg:px-8 border-b border-neutral-800 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto text-center space-y-3">
+      <span class="sec-label justify-center">MEMBERSHIP TIERS</span>
+      <h1 class="t-h2 text-white">CHOOSE YOUR GYMDESK PASS</h1>
+      <p class="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto">
+        Transparent pricing, zero hidden enrollment fees. Full 10,000 sq.ft floor access, free lockers, and automated digital membership care.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING CARDS -->
+  <section id="plans" class="section border-b border-neutral-800">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <!-- Plan 1: Monthly -->
+        <div class="plan-card" data-plan="Monthly" data-fee="1200">
+          <div class="plan-name">MONTHLY PASS</div>
+          <div class="plan-price">₹1,200 <span>/mo</span></div>
+          <p class="text-xs text-neutral-400 mb-4">Flexible month-to-month strength membership.</p>
+          <div class="space-y-2 border-t border-neutral-800 pt-3">
+            <div class="plan-feat">Full 10,000 sq.ft floor access</div>
+            <div class="plan-feat">Free personal locker access</div>
+            <div class="plan-feat">WhatsApp expiry &amp; renewal reminders</div>
+            <div class="plan-feat text-neutral-500">Floor coach guidance</div>
+          </div>
+          <button class="btn btn-outline w-full text-xs mt-6 py-2.5">Select Monthly</button>
+        </div>
+
+        <!-- Plan 2: Quarterly (Featured) -->
+        <div class="plan-card featured selected" data-plan="Quarterly" data-fee="3000">
+          <div class="flex items-center justify-between">
+            <div class="plan-name text-red-400">QUARTERLY (3 MOS)</div>
+            <span class="badge-popular">MOST POPULAR</span>
+          </div>
+          <div class="plan-price">₹3,000 <span>/ 3 mos</span></div>
+          <p class="text-xs text-neutral-400 mb-4">Only ₹1,000/mo. Ideal commitment for transformation.</p>
+          <div class="space-y-2 border-t border-neutral-800 pt-3">
+            <div class="plan-feat font-semibold text-white">Everything in Monthly plan</div>
+            <div class="plan-feat">Free 1-on-1 Fitness Assessment</div>
+            <div class="plan-feat">Free InBody body composition scan</div>
+            <div class="plan-feat">Custom Diet &amp; Macro Blueprint</div>
+            <div class="plan-feat">Weekend sauna access</div>
+          </div>
+          <button class="btn btn-red w-full text-xs mt-6 py-2.5">Select Quarterly</button>
+        </div>
+
+        <!-- Plan 3: Half-Yearly -->
+        <div class="plan-card" data-plan="Half-yearly" data-fee="5500">
+          <div class="plan-name">HALF-YEARLY (6 MOS)</div>
+          <div class="plan-price">₹5,500 <span>/ 6 mos</span></div>
+          <p class="text-xs text-neutral-400 mb-4">Save 25% compared to monthly memberships.</p>
+          <div class="space-y-2 border-t border-neutral-800 pt-3">
+            <div class="plan-feat font-semibold text-white">Everything in Quarterly</div>
+            <div class="plan-feat">Unlimited Sauna &amp; Steam Bath</div>
+            <div class="plan-feat">2 Free Guest Workout Passes</div>
+            <div class="plan-feat">14-Day Membership Freeze Privilege</div>
+          </div>
+          <button class="btn btn-outline w-full text-xs mt-6 py-2.5">Select Half-Yearly</button>
+        </div>
+
+        <!-- Plan 4: Yearly VIP -->
+        <div class="plan-card" data-plan="Yearly" data-fee="10000">
+          <div class="flex items-center justify-between">
+            <div class="plan-name">YEARLY VIP (12 MOS)</div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/40">BEST VALUE</span>
+          </div>
+          <div class="plan-price">₹10,000 <span>/ year</span></div>
+          <p class="text-xs text-neutral-400 mb-4">Less than ₹833/month. The serious lifter's pass.</p>
+          <div class="space-y-2 border-t border-neutral-800 pt-3">
+            <div class="plan-feat font-semibold text-white">Full 12-Month VIP All-Access</div>
+            <div class="plan-feat">3 Free 1-on-1 Personal Training sessions</div>
+            <div class="plan-feat">Exclusive IronFit Gym Hoodie &amp; Shaker</div>
+            <div class="plan-feat">30-Day Total Membership Freeze</div>
+            <div class="plan-feat">Unlimited Monthly InBody Scans</div>
+          </div>
+          <button class="btn btn-outline w-full text-xs mt-6 py-2.5">Select Annual VIP</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRATION FORM -->
+  <section id="join" class="section bg-[#0c0c0c] border-b border-neutral-800">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-5 space-y-4">
+          <span class="sec-label">START TODAY</span>
+          <h2 class="t-h2 text-white">INSTANT DIGITAL REGISTRATION</h2>
+          <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+            Fill your details below. Your membership ID and digital access pass will be generated instantly and synced to your WhatsApp.
+          </p>
+
+          <div class="p-4 bg-[#141414] rounded border border-neutral-800 space-y-3 font-mono text-xs">
+            <div class="text-red-400 font-bold uppercase tracking-wider text-[11px]">⚡ Automated Registration Guarantee</div>
+            <p class="text-neutral-400 text-[11px]">
+              No paper forms or lost cards. Once submitted, your phone number becomes your unique digital gym key. You'll receive instant WhatsApp reminders 3 days before any renewal is due.
+            </p>
+          </div>
+        </div>
+
+        <!-- Registration Card -->
+        <div class="lg:col-span-7">
+          <div class="form-wrap">
+            <div class="flex items-center justify-between pb-4 mb-5 border-b border-neutral-800">
+              <span class="text-xs font-bold uppercase tracking-wider text-white font-['Barlow_Condensed'] text-base">New Member Registration</span>
+              <span id="reg-fee-display" class="text-xl font-black text-red-500 font-['Barlow_Condensed']">₹3,000</span>
+            </div>
+
+            <form id="form-gym-register" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="reg-name" class="form-label">Full Name *</label>
+                  <input id="reg-name" type="text" required placeholder="e.g. Aryan Shekhawat" class="form-input">
+                </div>
+                <div>
+                  <label for="reg-phone" class="form-label">WhatsApp Mobile Number *</label>
+                  <input id="reg-phone" type="tel" required placeholder="10-digit phone number" class="form-input">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="reg-plan" class="form-label">Selected Membership Plan</label>
+                  <select id="reg-plan" class="form-input form-select">
+                    <option value="Monthly">Monthly Pass — ₹1,200</option>
+                    <option value="Quarterly" selected>Quarterly (3 Months) — ₹3,000</option>
+                    <option value="Half-yearly">Half-Yearly (6 Months) — ₹5,500</option>
+                    <option value="Yearly">Yearly VIP (12 Months) — ₹10,000</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="reg-start-date" class="form-label">Membership Start Date</label>
+                  <input id="reg-start-date" type="date" class="form-input">
+                </div>
+              </div>
+
+              <!-- Opt-in Checkbox -->
+              <div class="flex items-start gap-3 p-3 bg-[#111] rounded border border-neutral-800 text-xs text-neutral-400">
+                <input id="reg-consent" type="checkbox" checked required class="mt-0.5 accent-red-600 w-4 h-4">
+                <label for="reg-consent">
+                  I agree to receive official membership alerts, schedule updates, and payment receipts via WhatsApp.
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-red w-full text-base py-3.5 mt-2">
+                COMPLETE REGISTRATION &amp; GET ACCESS
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-1 text-center md:text-left">
+        <div class="text-lg font-black text-white font-['Barlow_Condensed'] uppercase tracking-wider flex items-center justify-center md:justify-start gap-2"><span>⚡ GYMDESK JAIPUR</span></div>
+        <p class="text-xs text-neutral-500">The hardcore iron and athletic conditioning standard. Plot 42, Kings Road, Nirman Nagar, Jaipur.</p>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-neutral-400">
+        <a href="/" class="hover:text-red-500">Home</a>
+        <a href="/portal.html" class="hover:text-red-500">Member Portal</a>
+        <a href="/contact.html" class="hover:text-red-500">Contact</a>
+        <span>•</span>
+        <button onclick="GymApp.toggleStaffModal()" class="text-neutral-500 hover:text-red-400 underline font-mono text-[11px]">Staff Desk View</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOT LAUNCHER -->
+  <button id="bot-launcher" onclick="GymApp.toggleBotWidget()" aria-label="Open AI Gym Assistant"><span>⚡</span><span>Ask Gym Assistant</span></button>
+
+  <!-- BOT WIDGET -->
+  <div id="bot-widget" class="hidden">
+    <div class="bot-header">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center font-bold text-white text-xs">⚡</div>
+        <div><div class="text-xs font-bold text-white font-['Barlow_Condensed'] uppercase tracking-wider">IronFit AI Assistant</div><div class="text-[9px] text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online • Instant Answers</div></div>
+      </div>
+      <button onclick="GymApp.toggleBotWidget()" class="text-neutral-400 hover:text-white text-lg font-bold">✕</button>
+    </div>
+    <div id="bot-messages" class="bot-chat-body"></div>
+    <div class="px-3 py-2 bg-[#111] flex gap-1.5 overflow-x-auto text-[10px] text-neutral-300 font-mono border-t border-neutral-800">
+      <button onclick="document.getElementById('bot-query-input').value='What are your fees?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Fees?</button>
+      <button onclick="document.getElementById('bot-query-input').value='What are your gym timings?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Timings?</button>
+      <button onclick="document.getElementById('bot-query-input').value='Do you offer a free trial pass?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Free Trial?</button>
+      <button onclick="document.getElementById('bot-query-input').value='Where is the gym located?';GymApp.sendUserQuery()" class="px-2 py-1 rounded bg-[#1f1f1f] hover:bg-red-950 hover:text-red-400 whitespace-nowrap">Location?</button>
+    </div>
+    <div class="bot-input-bar">
+      <input id="bot-query-input" type="text" placeholder="Ask about fees, timings, trial..." class="flex-1 bg-[#1c1c1c] rounded px-3 py-1.5 text-xs text-white outline-none">
+      <button id="btn-send-bot-query" class="w-8 h-8 rounded bg-red-600 text-white flex items-center justify-center font-bold text-xs hover:bg-red-500">➤</button>
+    </div>
+  </div>
+
+  <!-- STAFF MODAL -->
+  <div id="staff-modal" class="hidden">
+    <div class="staff-modal-box">
+      <div class="p-4 bg-[#111] border-b border-neutral-800 flex items-center justify-between">
+        <div class="flex items-center gap-2"><span class="text-red-500 font-bold">🔒</span><span class="text-sm font-bold uppercase tracking-wider text-white font-['Barlow_Condensed']">Front-Desk Manager Console</span></div>
+        <button onclick="GymApp.toggleStaffModal()" class="text-neutral-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+      <div class="p-4 bg-[#0a0a0a] border-b border-neutral-800"><div id="staff-digest-preview"></div></div>
+      <div class="flex-1 overflow-auto p-4">
+        <table class="w-full text-left"><thead><tr class="text-[11px] font-mono text-neutral-500 border-b border-neutral-800"><th class="p-2">ID</th><th class="p-2">NAME</th><th class="p-2">PHONE</th><th class="p-2">PLAN</th><th class="p-2">FEE</th><th class="p-2">EXPIRY</th><th class="p-2">STATUS</th><th class="p-2">LAST REMINDER</th></tr></thead><tbody id="staff-sheet-tbody"></tbody></table>
+      </div>
+      <div class="p-3 bg-[#111] border-t border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+        <span>SQLite Database (gym.db)</span>
+        <div class="flex items-center gap-2">
+          <a href="/api/export/csv" download class="px-3 py-1 bg-neutral-800 hover:bg-neutral-700 text-white rounded text-[11px] flex items-center gap-1">📥 Export CSV</a>
+          <button onclick="GymApp.triggerExpiryScan()" class="px-3 py-1 bg-neutral-800 hover:bg-red-900 text-white rounded text-[11px]">Run Expiry Scan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div id="success-overlay" class="no-print">
+    <div class="success-box">
+      <div class="success-icon">💪</div>
+      <h3 class="t-h2 text-white mb-1">REGISTRATION CONFIRMED!</h3>
+      <p class="text-xs text-neutral-400 mb-6">Welcome to IronFit Gym. Your membership record has been generated and saved.</p>
+      <div class="p-4 bg-[#141414] rounded border border-neutral-800 text-left space-y-2.5 font-mono text-xs mb-6">
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">MEMBER ID</span><span id="modal-member-id" class="text-red-400 font-bold">GYM-000000</span></div>
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">MEMBER NAME</span><span id="modal-member-name" class="text-white font-bold font-sans">Name</span></div>
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">PLAN</span><span id="modal-member-plan" class="text-white">Quarterly</span></div>
+        <div class="flex justify-between pb-2 border-b border-neutral-800"><span class="text-neutral-500">VALID UNTIL</span><span id="modal-member-expiry" class="text-emerald-400 font-bold">2026-12-31</span></div>
+        <div class="flex justify-between"><span class="text-neutral-500">AMOUNT DUE</span><span id="modal-member-fee" class="text-white font-bold">₹3,000</span></div>
+      </div>
+      <button id="btn-close-modal" class="btn btn-red w-full text-xs py-3">Done — Go to Floor</button>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/gym.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.GymApp) GymApp.init();
+      const btnMob = document.getElementById('btn-mobile-nav');
+      const menuMob = document.getElementById('mobile-menu');
+      if (btnMob && menuMob) {
+        btnMob.addEventListener('click', () => menuMob.classList.toggle('hidden'));
+        menuMob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menuMob.classList.add('hidden')));
+      }
+    });
+  </script>
+</body>
+</html>

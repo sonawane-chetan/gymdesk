@@ -1,0 +1,20 @@
+{
+  "name": "gymdesk",
+  "version": "1.0.0",
+  "description": "GymDesk — Hardcore Strength & Conditioning Club Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [
+    "gym",
+    "management",
+    "fitness",
+    "sqlite"
+  ],
+  "author": "GymDesk",
+  "license": "MIT"
+}

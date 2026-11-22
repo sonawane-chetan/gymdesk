@@ -9,6 +9,9 @@ node_modules/
 # Database (optional: keep gym.db ignored if personal data)
 # gym.db
 
+# MCP config (contains auth tokens)
+.mcp.json
+
 # OS files
 .DS_Store
 Thumbs.db
